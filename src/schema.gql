@@ -1,0 +1,68 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Todo {
+  id: Int!
+  title: String!
+  description: String!
+  done: Boolean!
+}
+
+"""Aggregations type"""
+type AggregationsType {
+  """Total of aggregations"""
+  total: Int!
+
+  """Number of pending aggregations"""
+  pending: Int!
+
+  """Number of completed aggregations"""
+  completed: Int!
+
+  """Number of total todos"""
+  totalToDosCompleted: Int! @deprecated(reason: "Use total instead")
+}
+
+type Query {
+  """Returns a greeting message."""
+  helloWorld: String!
+  randomNumber: Float!
+
+  """Returns a random number from 0 to the specified maximum value."""
+  randomNumberFromZeroTo(max: Int = 10): Int!
+  todos(
+    """Status of the todo"""
+    status: Boolean
+  ): [Todo!]!
+  todo(id: Int!): Todo!
+  totalTodos: Int!
+  completedTodos: Int!
+  pendingTodos: Int!
+  aggregations: AggregationsType!
+}
+
+type Mutation {
+  createTodo(createTodoInput: CreateTodoInput!): Todo!
+  updateTodo(id: Int!, updateTodoInput: UpdateTodoInput!): Todo!
+  remove(id: Int!): String!
+}
+
+input CreateTodoInput {
+  """Title of the todo"""
+  title: String!
+
+  """Description of the todo"""
+  description: String!
+}
+
+input UpdateTodoInput {
+  """Title of the todo"""
+  title: String
+
+  """Description of the todo"""
+  description: String
+
+  """Is the todo done?"""
+  done: Boolean
+}
